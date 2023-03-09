@@ -3,9 +3,9 @@
   <div class="menu bg-primary border-r-2 flex flex-col flex-nowrap p-4 overflow-y-auto w-fit">
     <ul class="grow shrink mt-20">
       <!-- Sidebar content here -->
-      <li><a href="/" class="hover:bg-accent" >Home</a></li>
-      <li><a href="/blog/" class="hover:bg-accent">Blog</a></li>
-      <li><a href="/projects" class="hover:bg-accent">Projects</a></li>
+      <li><a id="home" href="/" class="hover:bg-accent" >Home</a></li>
+      <li><a id="blog" href="/blog" class="hover:bg-accent">Blog</a></li>
+      <li><a id="projects" href="/projects" class="hover:bg-accent">Projects</a></li>
       <!-- <li><a href="/services" class="hover:bg-accent">Services</a></li> -->
       <!-- <li><a href="/cv" class="hover:bg-secondary">CV</a></li> -->
       <li><a href="mailto:bentsoft365@gmail.com.com" class="hover:bg-accent">Email me</a></li>
@@ -64,3 +64,26 @@
     </div>
   </div>
 </div>
+<script>
+  const homeLink = document.getElementById('home');
+  const blogLink = document.getElementById('blog');
+  const projectsLink = document.getElementById('projects');
+
+  var isHome = true;
+
+  const url = window.location.href;
+
+  const pages = [ projectsLink, blogLink ];
+
+  pages.forEach( (elem) => {
+    if (url.includes(elem.id)) {
+      isHome = false;
+      elem.classList.add('bg-accent');
+      homeLink.classList.remove('bg-accent');
+    } 
+    if (isHome == true) {
+      homeLink.classList.add('bg-accent');
+    } 
+  })
+
+</script>
