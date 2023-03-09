@@ -12,19 +12,15 @@ const last_posts = posts.slice(0, 3);
 
 <BaseLayout>
 
-    <div class="pb-12 mt-5">
+    <div class="pb-4 mt-5">
       <div class="text-3xl font-bold">Carlos Z. Bent</div>
       <div class="text-xl py-3 font-bold">Software Engineer and Writer</div>
-      <div class="py-2">
-
-      </div>
-      <div class="mt-8">
-        <a class="btn border-none hover:bg-primary hover:text-slate-800 hover:shadow-2xl transition-all duration-100 ease-in-out" href="https://twitter.com/CarlosZBent" target="_blank"> Let's connect!</a>
-      </div>
     </div>
 
+    <hr class="border-accent" >
+
     <div>
-      <div class="text-3xl w-full font-bold mb-5 mt-10">My most recent writing</div>
+      <div class="text-3xl w-full font-bold mb-5 mt-7">My most recent writing</div>
     </div>
 
     {
@@ -34,23 +30,23 @@ const last_posts = posts.slice(0, 3);
           img={post.data.heroImage}
           desc={post.data.description}
           url={"/blog/" + post.slug}
+          badge={post.data.badge}
           target="_self"
         />
-        // <div class="divider my-0"></div>
       ))
     }
 
-<div class="newsletterContainer mt-10 mx-auto shadow-lg px-4 py-8 rounded-md bg-primary"> 
   <!--CONTAINER FOR ALL THE NEWSLETTER RELATED ELEMENTS-->
-  <h2 class="newsletterHeader my-3 text-2xl text-center">
+  <h2 class="newsletterHeader my-3 text-2xl text-center mt-16">
       Receive your regular dosis of food for thought
   </h2>
   <h3 class="newsletterHeader my-3 text-lg text-center">
       Leave your data and click subscribe and you'll be on board 🎉
   </h3>
-  <iframe src="https://carloszbent.substack.com/embed" width="480" height="320" class="newsletter-embed mb-1 mt-10 mx-auto rounded-md"
-  style="background:#fafafa; padding:1rem" frameborder="0" scrolling="no"></iframe>    
-
-</div>
+  <iframe src="https://carloszbent.substack.com/embed" 
+  width="90%" height="320"
+  class="newsletter-embed mb-2 mt-5 mx-auto rounded-lg shadow-xl border-2 border-accent"
+  style="background:#fafafa; padding:1rem" frameborder="0" scrolling="no">
+</iframe>    
 
 </BaseLayout>

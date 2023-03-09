@@ -2,6 +2,7 @@
 title: "How to make an exclusive Telegram Bot"
 description: "We'll make a Telegram bot that can only be used by the members of our exclusive group."
 pubDate: "May 21 2022"
+badge: "python | bot"
 ---
 This is a solution I found because I needed to create this functionality for a project, but Telegram bots, unlike Telegram groups, don't have an option to make them private. You can't restrict the bot's use with a link neither, be it referal or auto generated. No, in Telegram, bots are simply there and anyone can start them, therefore, our solution must come __after__ the bot is initiated.
 

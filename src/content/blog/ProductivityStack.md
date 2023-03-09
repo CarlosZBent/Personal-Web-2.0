@@ -2,6 +2,7 @@
 title: "My productivity stack. How I get more done with a clean mind"
 description: "The tech I use to keep my head above water level in our busy industry."
 pubDate: "Apr 4 2022"
+badge: "productivity"
 ---
 
 At the end of the day, little matter our skills and knowledge if we can't properly organize our tasks. That's why I put a lot of my focus on keeping my productivity as high as posible.
@@ -10,7 +11,7 @@ With the word productivity I mean nothing more than __efficiency__ and __effecti
 
 For some people, this can be achieved with nothing more than a to do list and some reminders, others need (or at least they think they need) a whole set of Notion pages with custom formulas and Airtable integration. There are a lot of systems and aplicable tips.
 
-I go for the route of having several apps, each dedicated to a specific purpose. Each one excellent in it's own field. So, I'm gonna show you the apps that form my personal and professional productivity universe, and also parts of the process, of the typical workflow I use. I hope you get good ideas 🤓.
+I go for the route of having several apps, each dedicated to a specific purpose. Each one excellent in it's own field. So, I'm gonna show you the apps that form my personal and professional productivity universe, and also parts of the process, of the typical workflow I use. I hope you get good ideas.
 
 ## Main tools
 
