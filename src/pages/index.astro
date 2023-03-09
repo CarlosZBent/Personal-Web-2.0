@@ -19,40 +19,12 @@ const last_posts = posts.slice(0, 3);
 
       </div>
       <div class="mt-8">
-        <a class="btn bg-[#b4d1e1] text-slate-800 hover:bg-[#9ab8d8] border-none rounded-md hover:shadow-xl" href="https://twitter.com/CarlosZBent" target="_blank"> Let's connect!</a>
+        <a class="btn border-none hover:bg-primary hover:text-slate-800 hover:shadow-2xl transition-all duration-100 ease-in-out" href="https://twitter.com/CarlosZBent" target="_blank"> Let's connect!</a>
       </div>
     </div>
 
     <div>
-      <div class="text-3xl w-full font-bold mb-2">My last projects</div>
-    </div>
-
-    <HorizontalCard
-      title="Demo Project 1"
-      img="/post_img.webp"
-      desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-      url="#"
-      badge="NEW"
-    />
-    <div class="divider my-0"></div>
-    <HorizontalCard
-      title="Demo Project 2"
-      img="/post_img.webp"
-      desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-      url="#"
-    />
-    <div class="divider my-0"></div>
-    <HorizontalCard
-      title="Demo Project 3"
-      img="/post_img.webp"
-      desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-      url="#"
-      badge="FOSS"
-    />
-
-
-    <div>
-      <div class="text-3xl w-full font-bold mb-5 mt-10">Latest from blog</div>
+      <div class="text-3xl w-full font-bold mb-5 mt-10">My most recent writing</div>
     </div>
 
     {
@@ -64,8 +36,21 @@ const last_posts = posts.slice(0, 3);
           url={"/blog/" + post.slug}
           target="_self"
         />
-        <div class="divider my-0"></div>
+        // <div class="divider my-0"></div>
       ))
     }
+
+<div class="newsletterContainer mt-10 mx-auto shadow-lg px-4 py-8 rounded-md bg-primary"> 
+  <!--CONTAINER FOR ALL THE NEWSLETTER RELATED ELEMENTS-->
+  <h2 class="newsletterHeader my-3 text-2xl text-center">
+      Receive your regular dosis of food for thought
+  </h2>
+  <h3 class="newsletterHeader my-3 text-lg text-center">
+      Leave your data and click subscribe and you'll be on board 🎉
+  </h3>
+  <iframe src="https://carloszbent.substack.com/embed" width="480" height="320" class="newsletter-embed mb-1 mt-10 mx-auto rounded-md"
+  style="background:#fafafa; padding:1rem" frameborder="0" scrolling="no"></iframe>    
+
+</div>
 
 </BaseLayout>
