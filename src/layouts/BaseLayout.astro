@@ -8,6 +8,7 @@ import ThemeToggle from "../components/ThemeToggle.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
 
 const { image, title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
+
 ---
 
 <!DOCTYPE html>
@@ -33,7 +34,7 @@ const { image, title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.prop
     <BaseHead title={title} description={description} image={image} />
   </head>
   <body>
-    <div class="w-5 left-[90%] top-5 absolute z-50">
+    <div class="themeToggleContainer w-5 left-[90%] top-5 absolute z-50">
       <ThemeToggle/>
     </div>
     <div class="bg-base-100 drawer drawer-mobile">

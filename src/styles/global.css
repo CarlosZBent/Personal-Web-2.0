@@ -5,3 +5,8 @@ body {
     font-family: 'Source Serif Pro', serif;
     font-size:medium;
 }
+@media (prefers-color-scheme: dark) {
+    .themeToggleContainer {
+        display: none;
+    }
+}
