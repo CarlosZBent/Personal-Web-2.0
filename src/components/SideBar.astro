@@ -8,7 +8,7 @@
       <li><a id="projects" href="/projects" class="hover:bg-accent">Projects</a></li>
       <!-- <li><a href="/services" class="hover:bg-accent">Services</a></li> -->
       <!-- <li><a href="/cv" class="hover:bg-secondary">CV</a></li> -->
-      <li><a href="mailto:bentsoft365@gmail.com.com" class="hover:bg-accent">Email me</a></li>
+      <li><a href="mailto:bentsoft365@gmail.com.com" target="_blank" id="emailContact" class="hover:bg-accent">Email me</a></li>
     </ul>
     <div class="social-icons px-4 my-2 flex self-center">
       <a href="https://github.com/CarlosZBent" target="_blank" class="mx-3 text-gray-900" aria-label="Github" title="Github">
@@ -65,6 +65,9 @@
   </div>
 </div>
 <script>
+  import mixpanel from "mixpanel-browser";
+  import { MIXPANEL_ID } from "../config"
+
   const homeLink = document.getElementById('home');
   const blogLink = document.getElementById('blog');
   const projectsLink = document.getElementById('projects');
@@ -84,6 +87,13 @@
     if (isHome) {
       homeLink.classList.add('bg-accent');
     } 
+  })
+
+  const emailContactLink = document.getElementById("emailContact");
+
+  emailContactLink.addEventListener("click", ()=>{
+    mixpanel.init(MIXPANEL_ID);
+    mixpanel.track("Email contact intention (link clicked)");
   })
 
 </script>
