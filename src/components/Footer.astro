@@ -23,15 +23,11 @@ const today = new Date();
   footerLinkTemplate.addEventListener('click', (e)=>{
     mixpanel.init(MIXPANEL_ID)
     mixpanel.track("footerLink for Astro Template clicked")
-    console.log("footerLink for Astro Template clicked");
-    console.log(e.target);
   })
 
   footerLinkManuel.addEventListener('click', (e)=>{
     mixpanel.init(MIXPANEL_ID)
     mixpanel.track("footerLink for Manuel's' page clicked")
-    console.log("footerLink for Manuel's' page clicked");
-    console.log(e.target);
   })
   
 </script>
