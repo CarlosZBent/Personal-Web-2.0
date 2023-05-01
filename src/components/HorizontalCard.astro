@@ -2,7 +2,7 @@
 const { title, img, desc, url, badge, tags, target = '_blank' } = Astro.props;
 ---
 
-<div class="rounded-2xl border-2 border-[#dcdcdc] hover:bg-primary hover:shadow-xl hover:border-accent p-6 transition-all duration-200 ease-in-out my-3">
+<div id={title} class="rounded-2xl border-2 border-[#dcdcdc] hover:bg-primary hover:shadow-xl hover:border-accent p-6 transition-all duration-200 ease-in-out my-3">
   <a href={url} target={target}>
     <div class="hero-content flex-col md:flex-row">
       {img && <img src={img} alt={title} class="max-w-full md:max-w-[13rem] rounded-lg" />}

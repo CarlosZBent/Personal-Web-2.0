@@ -19,6 +19,7 @@
     "astro": "^2.0.0",
     "daisyui": "^2.51.5",
     "dayjs": "^1.11.7",
+    "mixpanel-browser": "^2.46.0",
     "theme-change": "^2.5.0"
   },
   "devDependencies": {
