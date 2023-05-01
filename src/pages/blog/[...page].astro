@@ -70,3 +70,15 @@ const { page } = Astro.props;
     }
   </div>
 </BaseLayout>
+
+<script>
+  import mixpanel from "mixpanel-browser";
+  
+  let MIXPANEL_ID = import.meta.env.PUBLIC_MIXPANEL_ID
+    
+  window.addEventListener('load', ()=>{
+    mixpanel.init(MIXPANEL_ID)
+    mixpanel.track("Blog posts page visit")
+  })
+
+</script>
