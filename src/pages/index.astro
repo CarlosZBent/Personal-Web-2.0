@@ -61,4 +61,33 @@ const last_posts = posts.slice(0, 3);
     mixpanel.track("Website visit")
   })
 
+  /* The below import statements and posts slicing is repeated from above because: 
+  - it has to be specified above to be used in the layout
+  - but it needs to be accessed in the script tags to attach event listeners
+  to the posts */
+  import { getCollection } from "astro:content";
+
+  const posts = (await getCollection('blog')).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+  );
+
+  const last_posts = posts.slice(0, 3);
+
+  const ids = Array();
+
+  // saving the post ids to an array
+  for (let post of last_posts) {
+    ids.push(post.data.title)
+  }
+
+  // using the ids stored in the arrayto attach event listeners to the blog posts cards
+  for (let id of ids) {
+    document.getElementById(id).addEventListener("click", ()=>{
+      mixpanel.init(MIXPANEL_ID);
+      mixpanel.track(`Blog post "${id}" clicked`, {
+        "page": "home page",
+      })
+    })
+  }
+
 </script>

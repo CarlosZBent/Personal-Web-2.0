@@ -5,7 +5,7 @@ import { getCollection } from "astro:content";
 
 export async function getStaticPaths({ paginate }) {
   const posts = await getCollection("blog");
-  return paginate(posts, { pageSize: 10 });
+  return paginate(posts, { pageSize: 5 });
 }
 
 const { page } = Astro.props;
@@ -80,5 +80,30 @@ const { page } = Astro.props;
     mixpanel.init(MIXPANEL_ID)
     mixpanel.track("Blog posts page visit")
   })
+
+  /* The below import statement and getting all the posts is repeated from above because: 
+  - it has to be specified above to be used in the layout
+  - but it needs to be accessed in the script tags to attach event listeners
+  to the posts */
+  import { getCollection } from "astro:content";
+
+  const posts = await getCollection("blog");
+
+  const ids = Array();
+
+  // saving the post ids to an array
+  for (let post of posts) {
+    ids.push(post.data.title)
+  }
+
+  // using the ids stored in the arrayto attach event listeners to the blog posts cards
+  for (let id of ids) {
+    document.getElementById(id).addEventListener("click", ()=>{
+      mixpanel.init(MIXPANEL_ID);
+      mixpanel.track(`Blog post "${id}" clicked`, {
+        "page": "blog page",
+      })
+    })
+  }
 
 </script>
