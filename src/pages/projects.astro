@@ -25,8 +25,7 @@ import HorizontalCard from "../components/HorizontalCard.astro";
 <script>
   import mixpanel from "mixpanel-browser";
   import { MIXPANEL_ID } from "../config";
-  import { insertIntoSupabase } from "../supabase_conn"
-
+  
   // page visit event
   window.addEventListener('load', ()=>{
     mixpanel.init(MIXPANEL_ID)
@@ -43,11 +42,6 @@ import HorizontalCard from "../components/HorizontalCard.astro";
     project.addEventListener("click", ()=>{
       mixpanel.init(MIXPANEL_ID);
       mixpanel.track(`project "${project.id}" clicked`);
-
-      insertIntoSupabase("TEST-TABLE1", {
-      date: new Date().toLocaleDateString(),
-      event_type: `project "${project.id}" clicked`
-    })
     })
   }
 
