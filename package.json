@@ -16,6 +16,7 @@
     "@astrojs/rss": "^1.0.1",
     "@astrojs/sitemap": "^1.0.0",
     "@astrojs/tailwind": "^3.0.0",
+    "@supabase/supabase-js": "^2.21.0",
     "astro": "^2.0.0",
     "daisyui": "^2.51.5",
     "dayjs": "^1.11.7",
