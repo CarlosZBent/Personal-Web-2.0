@@ -20,7 +20,8 @@
     "daisyui": "^2.51.5",
     "dayjs": "^1.11.7",
     "mixpanel-browser": "^2.46.0",
-    "theme-change": "^2.5.0"
+    "theme-change": "^2.5.0",
+    "@supabase/supabase-js":"2.21.0"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.7"
