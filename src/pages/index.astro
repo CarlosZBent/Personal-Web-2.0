@@ -54,18 +54,21 @@ const last_posts = posts.slice(0, 3);
 
 <script>
   import mixpanel from "mixpanel-browser";
-  import { MIXPANEL_ID } from "../config";
+  import { getCollection } from "astro:content";
+  import { MIXPANEL_ID, CURRENT_DATE, SUPABASE_ANALYTICS_TABLE } from "../config";
+  import { insertIntoSupabase } from "../supabase_conn";
     
   window.addEventListener('load', ()=>{
     mixpanel.init(MIXPANEL_ID)
     mixpanel.track("Website visit")
+    const supabaseData = {"date":CURRENT_DATE, "event_type":"Website visit"};
+    insertIntoSupabase(SUPABASE_ANALYTICS_TABLE, supabaseData);
   })
 
-  /* The below import statements and posts slicing is repeated from above because: 
+  /* The below is repeated from above because: 
   - it has to be specified above to be used in the layout
   - but it needs to be accessed in the script tags to attach event listeners
   to the posts */
-  import { getCollection } from "astro:content";
 
   const posts = (await getCollection('blog')).sort(
     (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
@@ -86,7 +89,9 @@ const last_posts = posts.slice(0, 3);
       mixpanel.init(MIXPANEL_ID);
       mixpanel.track(`Blog post "${id}" clicked`, {
         "page": "home page",
-      })
+      });
+      const supabaseData = {"date":CURRENT_DATE, "event_type":`Blog post "${id}" clicked (home page)`};
+      insertIntoSupabase(SUPABASE_ANALYTICS_TABLE, supabaseData);
     })
   }
 

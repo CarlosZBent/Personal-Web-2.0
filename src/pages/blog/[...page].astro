@@ -73,12 +73,29 @@ const { page } = Astro.props;
 
 <script>
   import mixpanel from "mixpanel-browser";
+  import { createClient } from "@supabase/supabase-js";
+
+  /* ALL THIS DATA IS HANDLED LOCALLY BECAUSE THIS PAGE WON'T 
+  ALLOW DATA TO BE IMPORTED FROM RELATIVE PATHS  */
+  let MIXPANEL_ID = import.meta.env.PUBLIC_MIXPANEL_ID;
+  let SUPABASE_ANALYTICS_TABLE = import.meta.env.PUBLIC_SUPABASE_ANALYTICS_TABLE;
+  let CURRENT_DATE = new Date().toLocaleDateString();
   
-  let MIXPANEL_ID = import.meta.env.PUBLIC_MIXPANEL_ID
+  const supabaseURL = import.meta.env.PUBLIC_SUPABASE_URL;
+  const supabaseKey = import.meta.env.PUBLIC_SUPABASE_KEY;
+  const supabaseConn = createClient(supabaseURL, supabaseKey);
+
+  async function insertIntoSupabase(table: String, jsonData) {
+    const { error } = await supabaseConn.from(String(table)).insert(
+        [jsonData]
+      )
+  }
     
   window.addEventListener('load', ()=>{
     mixpanel.init(MIXPANEL_ID)
     mixpanel.track("Blog posts page visit")
+    const supabaseData = {"date":CURRENT_DATE, "event_type":"Blog posts page visit"};
+    insertIntoSupabase(SUPABASE_ANALYTICS_TABLE, supabaseData);
   })
 
   /* The below import statement and getting all the posts is repeated from above because: 
@@ -102,7 +119,9 @@ const { page } = Astro.props;
       mixpanel.init(MIXPANEL_ID);
       mixpanel.track(`Blog post "${id}" clicked`, {
         "page": "blog page",
-      })
+      });
+      const supabaseData = {"date":CURRENT_DATE, "event_type":`Blog post "${id}" clicked (blogs page)`};
+      insertIntoSupabase(SUPABASE_ANALYTICS_TABLE, supabaseData);
     })
   }
 

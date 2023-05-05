@@ -3,5 +3,8 @@
 
 export const SITE_TITLE = 'Carlos Z. Bent';
 export const SITE_DESCRIPTION = "Welcome to Carlos Z. Bent's personal space on the web. Come in to find info, projects and contact";
+
 export const MIXPANEL_ID = import.meta.env.PUBLIC_MIXPANEL_ID
+
 export const CURRENT_DATE = new Date().toLocaleDateString()
+export const SUPABASE_ANALYTICS_TABLE = import.meta.env.PUBLIC_SUPABASE_ANALYTICS_TABLE

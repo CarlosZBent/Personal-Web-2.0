@@ -24,24 +24,32 @@ import HorizontalCard from "../components/HorizontalCard.astro";
 
 <script>
   import mixpanel from "mixpanel-browser";
-  import { MIXPANEL_ID } from "../config";
+  import { MIXPANEL_ID, CURRENT_DATE, SUPABASE_ANALYTICS_TABLE } from "../config";
+  import { insertIntoSupabase } from "../supabase_conn"
   
   // page visit event
   window.addEventListener('load', ()=>{
     mixpanel.init(MIXPANEL_ID)
     mixpanel.track("Projects page visit")
+    const supabaseData = {"date":CURRENT_DATE, "event_type":"Projects page visit"};
+    insertIntoSupabase(SUPABASE_ANALYTICS_TABLE, supabaseData);
   })
 
   // projects clicks events
   let trabajostechProject = document.getElementById("Directorio de trabajos tech");
   let csvwizardProject = document.getElementById("csv_wizard");
 
+  // list to store the projects DOM elements
   const projects = [trabajostechProject, csvwizardProject];
 
+  /* iterating over the projects DOM elements 
+  array to attach event listeners to them */
   for (let project of projects) {
     project.addEventListener("click", ()=>{
       mixpanel.init(MIXPANEL_ID);
       mixpanel.track(`project "${project.id}" clicked`);
+      const supabaseData = {"date":CURRENT_DATE, "event_type":`project "${project.id}" clicked`};
+      insertIntoSupabase(SUPABASE_ANALYTICS_TABLE, supabaseData);
     })
   }
 
