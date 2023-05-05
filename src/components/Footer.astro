@@ -16,7 +16,7 @@ const today = new Date();
 <script>
   import mixpanel from "mixpanel-browser";
   import { MIXPANEL_ID, CURRENT_DATE, SUPABASE_ANALYTICS_TABLE } from "../config";
-  import { insertIntoSupabase } from "../supabase_conn";
+  import { insertIntoSupabase, SupabaseAnalyticsTableRow } from "../supabase_conn";
 
   let footerLinkTemplate = document.getElementById("footerLinkTemplate");
   let footerLinkManuel = document.getElementById("footerLinkManuel");
@@ -24,14 +24,20 @@ const today = new Date();
   footerLinkTemplate.addEventListener('click', (e)=>{
     mixpanel.init(MIXPANEL_ID)
     mixpanel.track("footerLink for Astro Template clicked")
-    const supabaseData = {"date":CURRENT_DATE, "event_type":"footerLink for Astro Template clicked"};
+    const supabaseData:SupabaseAnalyticsTableRow = {
+      "date":CURRENT_DATE, 
+      "event_type":"footerLink for Astro Template clicked",
+    };
     insertIntoSupabase(SUPABASE_ANALYTICS_TABLE, supabaseData);
   })
 
   footerLinkManuel.addEventListener('click', (e)=>{
     mixpanel.init(MIXPANEL_ID)
     mixpanel.track("footerLink for Manuel's' page clicked")
-    const supabaseData = {"date":CURRENT_DATE, "event_type":"footerLink for Manuel's' page clicked"};
+    const supabaseData:SupabaseAnalyticsTableRow = {
+      "date":CURRENT_DATE, 
+      "event_type":"footerLink for Manuel's' page clicked"
+    };
     insertIntoSupabase(SUPABASE_ANALYTICS_TABLE, supabaseData);
   })
   

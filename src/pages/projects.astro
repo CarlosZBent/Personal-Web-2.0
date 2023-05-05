@@ -25,13 +25,16 @@ import HorizontalCard from "../components/HorizontalCard.astro";
 <script>
   import mixpanel from "mixpanel-browser";
   import { MIXPANEL_ID, CURRENT_DATE, SUPABASE_ANALYTICS_TABLE } from "../config";
-  import { insertIntoSupabase } from "../supabase_conn"
+  import { insertIntoSupabase, SupabaseAnalyticsTableRow } from "../supabase_conn";
   
   // page visit event
   window.addEventListener('load', ()=>{
     mixpanel.init(MIXPANEL_ID)
     mixpanel.track("Projects page visit")
-    const supabaseData = {"date":CURRENT_DATE, "event_type":"Projects page visit"};
+    const supabaseData:SupabaseAnalyticsTableRow = {
+      "date":CURRENT_DATE, 
+      "event_type":"Projects page visit"
+    };
     insertIntoSupabase(SUPABASE_ANALYTICS_TABLE, supabaseData);
   })
 
@@ -48,7 +51,10 @@ import HorizontalCard from "../components/HorizontalCard.astro";
     project.addEventListener("click", ()=>{
       mixpanel.init(MIXPANEL_ID);
       mixpanel.track(`project "${project.id}" clicked`);
-      const supabaseData = {"date":CURRENT_DATE, "event_type":`project "${project.id}" clicked`};
+      const supabaseData:SupabaseAnalyticsTableRow = {
+        "date":CURRENT_DATE, 
+        "event_type":`project "${project.id}" clicked`
+      };
       insertIntoSupabase(SUPABASE_ANALYTICS_TABLE, supabaseData);
     })
   }

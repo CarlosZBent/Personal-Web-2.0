@@ -67,7 +67,7 @@
 <script>
   import mixpanel from "mixpanel-browser";
   import { MIXPANEL_ID, CURRENT_DATE, SUPABASE_ANALYTICS_TABLE } from "../config";
-  import { insertIntoSupabase } from "../supabase_conn";
+  import { insertIntoSupabase, SupabaseAnalyticsTableRow } from "../supabase_conn";
 
   const homeLink = document.getElementById('home');
   const blogLink = document.getElementById('blog');
@@ -95,7 +95,10 @@
   emailContactLink.addEventListener("click", ()=>{
     mixpanel.init(MIXPANEL_ID);
     mixpanel.track("Email contact intention (link clicked)");
-    const supabaseData = {"date":CURRENT_DATE, "event_type":"Email contact intention (link clicked)"};
+    const supabaseData:SupabaseAnalyticsTableRow = {
+      "date":CURRENT_DATE, 
+      "event_type":"Email contact intention (link clicked)"
+    };
     insertIntoSupabase(SUPABASE_ANALYTICS_TABLE, supabaseData);
   })
 

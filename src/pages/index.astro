@@ -56,12 +56,15 @@ const last_posts = posts.slice(0, 3);
   import mixpanel from "mixpanel-browser";
   import { getCollection } from "astro:content";
   import { MIXPANEL_ID, CURRENT_DATE, SUPABASE_ANALYTICS_TABLE } from "../config";
-  import { insertIntoSupabase } from "../supabase_conn";
+  import { insertIntoSupabase, SupabaseAnalyticsTableRow } from "../supabase_conn";
     
   window.addEventListener('load', ()=>{
     mixpanel.init(MIXPANEL_ID)
     mixpanel.track("Website visit")
-    const supabaseData = {"date":CURRENT_DATE, "event_type":"Website visit"};
+    const supabaseData:SupabaseAnalyticsTableRow = {
+      "date":CURRENT_DATE, 
+      "event_type":"Website visit"
+    };
     insertIntoSupabase(SUPABASE_ANALYTICS_TABLE, supabaseData);
   })
 
@@ -90,7 +93,10 @@ const last_posts = posts.slice(0, 3);
       mixpanel.track(`Blog post "${id}" clicked`, {
         "page": "home page",
       });
-      const supabaseData = {"date":CURRENT_DATE, "event_type":`Blog post "${id}" clicked (home page)`};
+      const supabaseData:SupabaseAnalyticsTableRow = {
+        "date":CURRENT_DATE, 
+        "event_type":`Blog post "${id}" clicked (home page)`
+      };
       insertIntoSupabase(SUPABASE_ANALYTICS_TABLE, supabaseData);
     })
   }
