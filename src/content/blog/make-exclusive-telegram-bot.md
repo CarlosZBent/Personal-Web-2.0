@@ -22,7 +22,7 @@ __Request:__ A data request to Telegram servers through it's bot API.
 
 ## Implementation
 
-First thing is to add the bot to the group we want to 'watch', sort of speak. Adding the bot works like adding any other user.
+First thing is to add the bot to the group we want to 'watch', so to speak. Adding the bot works like adding any other user.
 
 Once added, we need to get that group's `id` to use it in our code. For that, we send it an _update_ from that group, it can be a random message on the group chat or mentioning the bot through it's username, it depends on the bot's inline settings.
 
@@ -44,9 +44,9 @@ We'll use the following URL: `https://api.telegram.org/botTOKEN/getUpdates`, whe
 
 From that info that we get in JSON format, we must take only the `id` of the `chat` object, which is inside the `message` object. You can see the group's name in the `title`, so you can identify the stuff easier. The `id` will be a large number preceded by a hyphen (`-`).
 
-Now we have the group's `id`. If, when browsing the data from the API request, all that data is missing, and instead we get only a `true`, best option is to get the bot out of the group and then add it again, then check again the request data after sending an update to the bot.
+Now we have the group's `id`. If, when browsing the data from the API request, all that data is missing, and instead we get only a `true` response, best option is to get the bot out of the group and then add it again, then check again the request data after sending an update to the bot.
 
-Let's get to the fun part now, coding.
+Let's get to the fun part now.
 
 That `id` we copied from the request data, we will save it on a variable.
 
@@ -54,7 +54,7 @@ That `id` we copied from the request data, we will save it on a variable.
 exclusive_group_id = ”-1234567890”
 ```
 
-Now, since we want to check if the user is a member from the very beggining of the bot's interaction with the user, we;ll add this snippet to the welcoming function. 
+Now, since we want to check if the user is a member from the very beggining of the bot's interaction with the user, we'll add this snippet to the welcoming function. 
 
 But before, let's understand how python-telegram-bot handles users inside a conversation, and inside a group.
 
@@ -68,7 +68,7 @@ This `id` will also be a large number, but without a preceding hyphen. Now we ca
 
 We'll use the method `getChatMember`. It will take as arguments the `exclusive_group_id` and the `user_id`, and it will return a `ChatMember` object that will contain a status.
 
-The list of status it can return is: `creator`, `administrator`, `member`, `left`, `kicked` o `restricted`. This are equivalent, respectively, to the owner, and administrator, a member, a user that left the group, a user that was kicked out of the group and a blocked user.
+The list of status it can return is: `creator`, `administrator`, `member`, `left`, `kicked` o `restricted`. This are equivalent, respectively, to the owner, an administrator, a member, a user that left the group, a user that was kicked out of the group and a blocked user.
 
 So, let's get the status of the user that interacted with our bot:
 
@@ -77,7 +77,7 @@ member_user = context.bot.getChatmember(exclusive_group_id, user_id)
 print(member_user.status)
 ```
 
-With that last line, we will see the returned `status` of the user. Now, let's check that the status is one that we want to give permission to. If the user is a group member it's `status` will be 'creator', 'administrator' or 'member'. Therefore, we can use a simple `if` statement to check the equality of the `status` value with any of those. There are cleaner ways to do this, even inside an `if` statement, but to be faster, let's do it in a way that works just as well, but makes it easier to appreciate the thought process behind it, though it is undoubtedly uglier.
+With that last line, we will see the returned `status` of the user. Now, let's check that the status is one that we want to give permission to. If the user is a group member it's `status` will be 'creator', 'administrator' or 'member'. Therefore, we can use a simple `if` statement to check the equality of the `status` value with any of those. There might be cleaner ways to do this, even inside an `if` statement, but to be faster, let's do it in a way that works just as well, and makes it easier to appreciate the thought process behind it, though it is undoubtedly uglier.
 
 ```
 exlusive_group_id = ”-1234567890”
