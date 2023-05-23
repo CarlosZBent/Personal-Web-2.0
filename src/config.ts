@@ -6,5 +6,5 @@ export const SITE_DESCRIPTION = "Welcome to Carlos Z. Bent's personal space on t
 
 export const MIXPANEL_ID = import.meta.env.PUBLIC_MIXPANEL_ID
 
-export const CURRENT_DATE = new Date().toLocaleDateString("es-ES", { timeZone: 'America/New_York' })
+export const CURRENT_DATE = new Date().toLocaleDateString("en-US", { timeZone: 'America/New_York' })
 export const SUPABASE_ANALYTICS_TABLE = import.meta.env.PUBLIC_SUPABASE_ANALYTICS_TABLE
