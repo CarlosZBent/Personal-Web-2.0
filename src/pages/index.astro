@@ -30,7 +30,7 @@ const last_posts = posts.slice(0, 3);
           title={post.data.title}
           img={post.data.heroImage}
           desc={post.data.description}
-          url={"/blog/" + post.slug}
+          url={"/blog/" + post.id}
           badge={post.data.badge}
           target="_self"
         />
@@ -53,52 +53,34 @@ const last_posts = posts.slice(0, 3);
 </BaseLayout>
 
 <script>
-  import mixpanel from "mixpanel-browser";
-  import { getCollection } from "astro:content";
-  import { MIXPANEL_ID, CURRENT_DATE, SUPABASE_ANALYTICS_TABLE } from "../config";
-  import { insertIntoSupabase, SupabaseAnalyticsTableRow } from "../supabase_conn";
-    
-  window.addEventListener('load', ()=>{
-    mixpanel.init(MIXPANEL_ID)
-    mixpanel.track("Website visit")
-    const supabaseData:SupabaseAnalyticsTableRow = {
-      "date":CURRENT_DATE, 
-      "event_type":"Website visit"
-    };
-    insertIntoSupabase(SUPABASE_ANALYTICS_TABLE, supabaseData);
-  })
+  // import mixpanel from "mixpanel-browser";
+  // import { MIXPANEL_ID, CURRENT_DATE, SUPABASE_ANALYTICS_TABLE } from "../config";
+  // import { insertIntoSupabase, SupabaseAnalyticsTableRow } from "../supabase_conn";
 
-  /* The below is repeated from above because: 
-  - it has to be specified above to be used in the layout
-  - but it needs to be accessed in the script tags to attach event listeners
-  to the posts */
+  // window.addEventListener('load', ()=>{
+  //   mixpanel.init(MIXPANEL_ID)
+  //   mixpanel.track("Website visit")
+  //   const supabaseData:SupabaseAnalyticsTableRow = {
+  //     "date":CURRENT_DATE,
+  //     "event_type":"Website visit"
+  //   };
+  //   insertIntoSupabase(SUPABASE_ANALYTICS_TABLE, supabaseData);
+  // })
 
-  const posts = (await getCollection('blog')).sort(
-    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-  );
+ const ids = JSON.parse('{JSON.stringify(posts.map(post => post.data.title))}');
 
-  const last_posts = posts.slice(0, 3);
-
-  const ids = Array();
-
-  // saving the post ids to an array
-  for (let post of last_posts) {
-    ids.push(post.data.title)
-  }
-
-  // using the ids stored in the arrayto attach event listeners to the blog posts cards
-  for (let id of ids) {
-    document.getElementById(id).addEventListener("click", ()=>{
-      mixpanel.init(MIXPANEL_ID);
-      mixpanel.track(`Blog post "${id}" clicked`, {
-        "page": "home page",
-      });
-      const supabaseData:SupabaseAnalyticsTableRow = {
-        "date":CURRENT_DATE, 
-        "event_type":`Blog post "${id}" clicked (home page)`
-      };
-      insertIntoSupabase(SUPABASE_ANALYTICS_TABLE, supabaseData);
-    })
-  }
+  // for (let id of ids) {
+  //   document.getElementById(id)?.addEventListener("click", ()=>{
+  //     mixpanel.init(MIXPANEL_ID);
+  //     mixpanel.track(`Blog post "${id}" clicked`, {
+  //       "page": "home page",
+  //     });
+  //     const supabaseData:SupabaseAnalyticsTableRow = {
+  //       "date":CURRENT_DATE,
+  //       "event_type":`Blog post "${id}" clicked (home page)`
+  //     };
+  //     insertIntoSupabase(SUPABASE_ANALYTICS_TABLE, supabaseData);
+  //   })
+  // }
 
 </script>

@@ -3,6 +3,7 @@ title: "Paint a picture of the future you want. Go there. People will follow. A 
 description: "Marketing master Seth Godin writes about Tribes. I summarize why you should read it."
 pubDate: "Oct 25 2023"
 badge: "book summary"
+slug: "seth-godin-tribes"
 ---
 
 Communities is what the whole internet is made of. The community of The Verge followers that reads their articles and watches their YouTube videos; the community of Kardashians followers that for some reason cares about the Kardashians lives; the Open Source community of developers, writers, translators and managers that maintain a number of Linux distros. Each of those is a tribe.

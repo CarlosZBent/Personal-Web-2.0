@@ -1,20 +1,19 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";
-import HorizontalCard from "../../components/HorizontalCard.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HorizontalCard from "../components/HorizontalCard.astro";
 import { getCollection } from "astro:content";
 
-export async function getStaticPaths({ paginate }) {
-  const posts = await getCollection("blog");
-  return paginate(posts, { pageSize: 5 });
-}
-
-const { page } = Astro.props;
+const posts = (await getCollection("blog")).map((post) => ({
+  ...post,
+  slug: post.id,
+}));
+const page = Astro.props?.page;
 ---
 
 <BaseLayout title="Blog">
   <ul>
     {
-      page.data.map((post) => (
+      posts.map((post) => (
         <>
           <HorizontalCard
             title={post.data.title}
@@ -27,11 +26,12 @@ const { page } = Astro.props;
         </>
       ))
     }
+    {console.log(posts[0].id)}
   </ul>
 
   <div class="flex justify-between">
     {
-      page.url.prev ? (
+      page?.url?.prev ? (
         <a href={page.url.prev} class="btn btn-ghost my-10 mx-5">
           {" "}
           <svg
@@ -50,7 +50,7 @@ const { page } = Astro.props;
       )
     }
     {
-      page.url.next ? (
+      page?.url?.next ? (
         <a href={page.url.next} class="btn btn-ghost my-10 mx-5">
           Older Posts{" "}
           <svg
@@ -72,11 +72,12 @@ const { page } = Astro.props;
 </BaseLayout>
 
 <script>
-  import mixpanel from "mixpanel-browser";
-  import { createClient } from "@supabase/supabase-js";
+  //import mixpanel from "mixpanel-browser";
+  // import { createClient } from "@supabase/supabase-js";
 
+  /*
   /* ALL THIS DATA IS HANDLED LOCALLY BECAUSE THIS PAGE WON'T 
-  ALLOW DATA TO BE IMPORTED FROM RELATIVE PATHS  */
+  ALLOW DATA TO BE IMPORTED FROM RELATIVE PATHS  
   let MIXPANEL_ID = import.meta.env.PUBLIC_MIXPANEL_ID;
   let SUPABASE_ANALYTICS_TABLE = import.meta.env.PUBLIC_SUPABASE_ANALYTICS_TABLE;
   let CURRENT_DATE = new Date().toLocaleDateString();
@@ -91,38 +92,31 @@ const { page } = Astro.props;
       )
   }
     
-  window.addEventListener('load', ()=>{
-    mixpanel.init(MIXPANEL_ID)
-    mixpanel.track("Blog posts page visit")
-    const supabaseData = {"date":CURRENT_DATE, "event_type":"Blog posts page visit"};
-    insertIntoSupabase(SUPABASE_ANALYTICS_TABLE, supabaseData);
-  })
+  // window.addEventListener('load', ()=>{
+  //   mixpanel.init(MIXPANEL_ID)
+  //   mixpanel.track("Blog posts page visit")
+  //   const supabaseData = {"date":CURRENT_DATE, "event_type":"Blog posts page visit"};
+  //   insertIntoSupabase(SUPABASE_ANALYTICS_TABLE, supabaseData);
+  // })*/
 
-  /* The below import statement and getting all the posts is repeated from above because: 
-  - it has to be specified above to be used in the layout
-  - but it needs to be accessed in the script tags to attach event listeners
-  to the posts */
-  import { getCollection } from "astro:content";
-
-  const posts = await getCollection("blog");
-
-  const ids = Array();
+  /* The below data is serialized from server-side post data so the client script does not need astro:content */
+  const ids = JSON.parse('{JSON.stringify(posts.map(post => post.data.title))}');
 
   // saving the post ids to an array
-  for (let post of posts) {
-    ids.push(post.data.title)
-  }
+  // for (let post of posts) {
+  //   ids.push(post.data.title)
+  // }
 
   // using the ids stored in the arrayto attach event listeners to the blog posts cards
-  for (let id of ids) {
-    document.getElementById(id).addEventListener("click", ()=>{
-      mixpanel.init(MIXPANEL_ID);
-      mixpanel.track(`Blog post "${id}" clicked`, {
-        "page": "blog page",
-      });
-      const supabaseData = {"date":CURRENT_DATE, "event_type":`Blog post "${id}" clicked (blogs page)`};
-      insertIntoSupabase(SUPABASE_ANALYTICS_TABLE, supabaseData);
-    })
-  }
+  // for (let id of ids) {
+  //   document.getElementById(id).addEventListener("click", ()=>{
+  //     mixpanel.init(MIXPANEL_ID);
+  //     mixpanel.track(`Blog post "${id}" clicked`, {
+  //       "page": "blog page",
+  //     });
+  //     const supabaseData = {"date":CURRENT_DATE, "event_type":`Blog post "${id}" clicked (blogs page)`};
+  //     insertIntoSupabase(SUPABASE_ANALYTICS_TABLE, supabaseData);
+  //   })
+  // }
 
 </script>
