@@ -17,7 +17,7 @@
     "@astrojs/sitemap": "^1.0.0",
     "@astrojs/tailwind": "^6.0.2",
     "@supabase/supabase-js": "2.21.0",
-    "astro": "^6.1.5",
+    "astro": "^5.18.1",
     "daisyui": "^2.51.5",
     "dayjs": "^1.11.7",
     "mixpanel-browser": "^2.46.0",
