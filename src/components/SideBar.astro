@@ -4,6 +4,7 @@
     <ul class="grow shrink mt-20">
       <!-- Sidebar content here -->
       <li><a id="home" href="/" class="hover:bg-accent" >Home</a></li>
+      <li><a id="bentsoft" href="/bentsoft" class="hover:bg-accent">Bentsoft ⭐️</a></li>
       <li><a id="blog" href="/blog" class="hover:bg-accent font-extrabold">Blog ✍</a></li>
       <li><a id="projects" href="/projects" class="hover:bg-accent">Projects</a></li>
       <!-- <li><a href="/services" class="hover:bg-accent">Services</a></li> -->
@@ -69,12 +70,13 @@
   const homeLink = document.getElementById('home');
   const blogLink = document.getElementById('blog');
   const projectsLink = document.getElementById('projects');
+  const bentsoftLink = document.getElementById('bentsoft');
 
   var isHome = true;
 
   const url = window.location.href;
 
-  const pages = [ projectsLink, blogLink ];
+  const pages = [ projectsLink, blogLink, bentsoftLink ];
 
   pages.forEach( (elem) => {
     if (url.includes(elem.id)) {
