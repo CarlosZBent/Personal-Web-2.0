@@ -1,7 +1,7 @@
 ---
 title: "Create a Registration System with QR Codes Using Airtable"
 description: "Build a fully automated event registration and check-in system with Airtable, QR codes, and n8n — no code required."
-pubDate: "Aug 3 2026"
+pubDate: "Aug 10 2026"
 badge: "Airtable"
 slug: "airtable-qr-event-registration-system"
 ---
@@ -74,7 +74,7 @@ Once we have generated the QR Code, we need to send it to the guest so they have
 This is easy to do with an Airtable automation too.
 
 ![Airtable automation to attach the QR Code to the guest record.](/images/blog/qr-registration-airtable/06-airtable-automation-email.webp)
-*Airtable automation to attach the QR Code to the guest record.*
+*Airtable automation to send a confirmation email.*
 
 We just need to listen to when a record is updated in our table, and have the trigger listen specifically to the QR Code attachment field. That way, this is triggered by our first automation updating the record with the generated QR Code.
 
